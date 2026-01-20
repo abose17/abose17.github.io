@@ -1,0 +1,243 @@
+---
+layout: default
+---
+<div class="blog-container">
+    <h1>Blog</h1>
+    <p class="blog-description">Thoughts, tutorials, and updates on my research and projects.</p>
+    
+    <div class="blog-grid">
+        {% for post in site.posts %}
+        <article class="blog-card">
+            <a href="{{ post.url | relative_url }}" class="blog-card-link">
+                <div class="blog-image">
+                    {% if post.image %}
+                        <img src="{{ post.image | relative_url }}" alt="{{ post.title }}">
+                    {% else %}
+                        <div class="blog-image-placeholder">
+                            <span>{{ post.title | truncatewords: 3, '' }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="blog-content">
+                    <h2 class="blog-title">{{ post.title }}</h2>
+                    <div class="blog-meta">
+                        <time datetime="{{ post.date | date_to_xmlschema }}">
+                            {{ post.date | date: "%B %-d, %Y" }}
+                        </time>
+                        {% if post.author %}
+                            <span class="blog-author">by {{ post.author }}</span>
+                        {% endif %}
+                    </div>
+                    <p class="blog-excerpt">
+                        {{ post.excerpt | default: post.content | strip_html | truncatewords: 30 }}
+                    </p>
+                    <div class="blog-social-share">
+                        <span class="share-label">Share:</span>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ post.url | relative_url }}&title={{ post.title | uri_escape }}" target="_blank" class="share-link linkedin">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/intent/tweet?text={{ post.title | uri_escape }}&url={{ site.url }}{{ post.url | relative_url }}" target="_blank" class="share-link twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ post.url | relative_url }}" target="_blank" class="share-link facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://reddit.com/submit?url={{ site.url }}{{ post.url | relative_url }}&title={{ post.title | uri_escape }}" target="_blank" class="share-link reddit">
+                            <i class="fab fa-reddit"></i>
+                        </a>
+                    </div>
+                    <span class="read-more">Read more →</span>
+                </div>
+            </a>
+        </article>
+        {% endfor %}
+    </div>
+    
+    <!-- Debug: Found {{ site.posts | size }} posts -->
+</div>
+
+<style>
+.blog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.blog-description {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.blog-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.blog-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+.blog-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.blog-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.blog-card:hover .blog-image img {
+    transform: scale(1.05);
+}
+
+.blog-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #3498db, #9b59b6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+.blog-content {
+    padding: 1.5rem;
+}
+
+.blog-title {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+    color: #2c3e50;
+}
+
+.blog-meta {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.blog-excerpt {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.read-more {
+    color: #3498db;
+    font-weight: 500;
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.blog-card:hover .read-more {
+    transform: translateX(5px);
+}
+
+.blog-social-share {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    padding: 0.75rem 0;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.share-label {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    font-weight: 500;
+    margin-right: 0.5rem;
+}
+
+.share-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.share-link.linkedin {
+    background: #0077b5;
+    color: white;
+}
+
+.share-link.linkedin:hover {
+    background: #005585;
+    transform: translateY(-2px);
+}
+
+.share-link.twitter {
+    background: #1da1f2;
+    color: white;
+}
+
+.share-link.twitter:hover {
+    background: #1a91da;
+    transform: translateY(-2px);
+}
+
+.share-link.facebook {
+    background: #1877f2;
+    color: white;
+}
+
+.share-link.facebook:hover {
+    background: #166fe5;
+    transform: translateY(-2px);
+}
+
+.share-link.reddit {
+    background: #ff4500;
+    color: white;
+}
+
+.share-link.reddit:hover {
+    background: #e63900;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .blog-social-share {
+        flex-wrap: wrap;
+    }
+}
+</style>

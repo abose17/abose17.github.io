@@ -1,6 +1,55 @@
-# <!--- theme: jekyll-theme-hacker -->
-# name: Hank Quinlan, Horrible Cop
-# markdown: kramdown
-# permalink: /blog/:year/:month/:day/:title
+# Site settings
+title: Avishek Bose
+description: Machine Learning Researcher | Data Scientist
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://abose17.github.io" # the base hostname & protocol for your site
+email: bosea@ornl.gov
+github_username: abose17
+twitter_username: rajamifa
+author: Avishek Bose
 
-# theme: jekyll-theme-slate
+# Build settings
+markdown: kramdown
+theme: jekyll-theme-cayman
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Blog settings
+collections:
+  projects:
+    output: true
+    permalink: /projects/:path/
+
+# Blog settings
+blog:
+  name: "Avishek's Blog"
+  description: "Thoughts, tutorials, and updates on my research and projects."
+  paginate: 5
+  permalink: /blog/:year/:month/:day/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Avishek Bose"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor

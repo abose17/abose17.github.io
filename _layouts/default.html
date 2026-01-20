@@ -1,28 +1,111 @@
 <!DOCTYPE html>
-	<html>
-		<head>
-			<title>{{ page.title }}</title>
-			<!-- link to main stylesheet -->
-			<link rel="stylesheet" type="text/css" href="/css/main.css">
-		</head>
-		<body>
-			<nav>
-	    		<ul>
-	        		<li><a href="/">Home</a></li>
-		        	<li><a href="/projects">Projects</a></li>
-				<li><a href="/publications">Publications</a></li>
-				<li><a href="/cv">CV</a></li>
-	        		<li><a href="/blog">Blog 2</a></li>
-				<li><a href="/contact">Contact</a></li>
-	    		</ul>
-			</nav>
-			<div class="container">
-			
-			{{ content }}
-			
-			</div><!-- /.container -->
-			<footer>
-	    
-			</footer>
-		</body>
-	</html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  
+    
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  {% seo %}
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+      
+      <nav class="site-nav">
+        <div class="nav-trigger">
+          <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+          <li><a href="{{ '/projects' | relative_url }}">Projects</a></li>
+          <li><a href="{{ '/publications' | relative_url }}">Publications</a></li>
+          <li><a href="{{ '/cv' | relative_url }}">CV</a></li>
+          <li><a href="{{ '/blog' | relative_url }}">Blog</a></li>
+          <li><a href="{{ '/news' | relative_url }}">News</a></li>
+          <li><a href="{{ '/contact' | relative_url }}">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Header Image -->
+  {% assign page_name = page.url | remove: '/' | remove: '.html' %}
+  {% if page_name == '' %}
+    {% assign header_image = '/assets/images/image_homepage.jpg' %}
+  {% elsif page_name == 'projects' %}
+    {% assign header_image = '/assets/images/image_projects.jpg' %}
+  {% elsif page_name == 'publications' %}
+    {% assign header_image = '/assets/images/image_publications.jpg' %}
+  {% elsif page_name == 'cv' %}
+    {% assign header_image = '/assets/images/image_cv.jpg' %}
+  {% elsif page_name == 'blog' %}
+    {% assign header_image = '/assets/images/image_blogs.jpg' %}
+  {% elsif page_name == 'news' %}
+    {% assign header_image = '/assets/images/image_news.jpg' %}
+  {% elsif page_name == 'contact' %}
+    {% assign header_image = '/assets/images/image_contact.avif' %}
+  {% else %}
+    {% assign header_image = '/assets/images/image_homepage.jpg' %}
+  {% endif %}
+
+  <div class="page-header" style="background-image: url('{{ header_image | relative_url }}');">
+    <div class="header-overlay">
+      <div class="container">
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="page-content">
+    <div class="container">
+      {{ content }}
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="social-links">
+          {% if site.github_username %}
+            <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-github"></i>
+            </a>
+          {% endif %}
+          {% if site.twitter_username %}
+            <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-twitter"></i>
+            </a>
+          {% endif %}
+          {% if site.linkedin_username %}
+            <a href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          {% endif %}
+          {% if site.email %}
+            <a href="mailto:{{ site.email }}">
+              <i class="fas fa-envelope"></i>
+            </a>
+          {% endif %}
+        </div>
+        <p class="copyright">&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>
