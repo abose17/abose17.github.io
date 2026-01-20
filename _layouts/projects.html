@@ -1,0 +1,58 @@
+---
+layout: default
+---
+
+<main class="page-content">
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-title">My Projects</h1>
+      <p class="page-description">A collection of my recent work and research projects. Each project demonstrates my skills in machine learning, data science, and software development.</p>
+    </header>
+
+    <div class="projects-grid">
+      {% assign sorted_projects = site.projects | sort: 'date' | reverse %}
+      {% for project in sorted_projects %}
+        <article class="project-card">
+          <div class="project-image">
+            <img 
+              src="{{ project.image | default: '/assets/images/project-placeholder.jpg' }}" 
+              alt="{{ project.title }}"
+              loading="lazy"
+            >
+          </div>
+          <div class="project-content">
+            <h2 class="project-title">{{ project.title }}</h2>
+            <p class="project-description">{{ project.description }}</p>
+            
+            {% if project.tags.size > 0 %}
+            <div class="project-tags">
+              {% for tag in project.tags %}
+                <span class="tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+            
+            <div class="project-links">
+              {% if project.demo %}
+                <a href="{{ project.demo }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                  <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+              {% endif %}
+              
+              {% if project.github %}
+                <a href="{{ project.github }}" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-github"></i> View Code
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+    
+    <div class="cta-section" style="margin-top: 4rem; text-align: center;">
+      <h2>Want to see more?</h2>
+      <p>Check out my <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener">GitHub profile</a> for more projects and contributions.</p>
+    </div>
+  </div>
+</main>

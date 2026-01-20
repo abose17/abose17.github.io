@@ -1,0 +1,119 @@
+---
+layout: default
+---
+
+<article class="project">
+  <header class="project-header">
+    <h1>{{ page.title }}</h1>
+    {% if page.image %}
+    <div class="project-image">
+      <img src="{{ page.image }}" alt="{{ page.title }}">
+    </div>
+    {% endif %}
+  </header>
+
+  <div class="project-content">
+    {{ content }}
+    
+    {% if page.tags.size > 0 %}
+    <div class="project-tags">
+      <strong>Technologies:</strong>
+      {% for tag in page.tags %}
+        <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+    
+    <div class="project-links">
+      {% if page.demo %}
+        <a href="{{ page.demo }}" class="btn" target="_blank">View Demo</a>
+      {% endif %}
+      {% if page.github %}
+        <a href="{{ page.github }}" class="btn github" target="_blank">GitHub</a>
+      {% endif %}
+    </div>
+  </div>
+</article>
+
+<style>
+.project {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.project-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.project-header h1 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.project-image {
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.project-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.project-content {
+  line-height: 1.8;
+  color: #444;
+}
+
+.project-content p {
+  margin-bottom: 1.5em;
+}
+
+.project-tags {
+  margin: 30px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.project-tags strong {
+  margin-right: 10px;
+}
+
+.project-links {
+  margin-top: 40px;
+  display: flex;
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .project {
+    padding: 20px 15px;
+  }
+  
+  .project-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .project-tags {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .project-links {
+    flex-direction: column;
+  }
+  
+  .project-links .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+</style>

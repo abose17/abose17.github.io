@@ -1,0 +1,297 @@
+---
+layout: default
+---
+
+<header class="contact-header">
+  <div class="container">
+    <h1>{{ page.title }}</h1>
+    <p>{{ page.description }}</p>
+  </div>
+</header>
+
+<main class="contact-main">
+  <div class="container">
+    <aside class="contact-sidebar left-sidebar">
+      <div class="sidebar-content">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#contact-form">Contact Form</a></li>
+          <li><a href="#contact-info">Contact Information</a></li>
+          <li><a href="#social-media">Social Media</a></li>
+        </ul>
+        
+        <div class="office-hours">
+          <h4>Office Hours</h4>
+          <p>Monday - Friday: 9am - 5pm</p>
+          <p>Weekend: By appointment</p>
+        </div>
+      </div>
+    </aside>
+    
+    <div class="contact-content">
+      {{ content }}
+    </div>
+    
+    <aside class="contact-sidebar right-sidebar">
+      <div class="sidebar-content">
+        <h3>Let's Work Together</h3>
+        <p>I'm currently available for freelance work and collaboration. Feel free to reach out!</p>
+        
+        <div class="cta-box">
+          <h4>Need Help?</h4>
+          <p>Check out my <a href="/faq">FAQ page</a> for quick answers to common questions.</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="contact-footer">
+  <div class="container">
+    <p>&copy; {{ 'now' | date: "%Y" }} {{ site.title }}. All rights reserved.</p>
+    <nav class="footer-nav">
+      <a href="/privacy">Privacy Policy</a>
+      <span>|</span>
+      <a href="/terms">Terms of Service</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+/* Base Styles */
+:root {
+  --primary-color: #2d3748;
+  --secondary-color: #4a5568;
+  --accent-color: #4299e1;
+  --light-bg: #f8fafc;
+  --border-color: #e2e8f0;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --transition: all 0.3s ease;
+}
+
+/* Header */
+.contact-header {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+              url('/images/image_contact.avif') center/cover no-repeat;
+  padding: 6rem 0;
+  text-align: center;
+  color: white;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.contact-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.contact-header .container {
+  position: relative;
+  z-index: 2;
+}
+
+.contact-header h1 {
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1rem;
+}
+
+.contact-header p {
+  color: #f0f0f0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+.contact-header h1 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.contact-header p {
+  color: var(--secondary-color);
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Main Content Layout */
+.contact-main {
+  padding: 3rem 0;
+  background-color: #fff;
+}
+
+.contact-main .container {
+  display: grid;
+  grid-template-columns: 250px 1fr 250px;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Sidebars */
+.contact-sidebar {
+  background: var(--light-bg);
+  border-radius: 8px;
+  padding: 1.5rem;
+  height: fit-content;
+  position: sticky;
+  top: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.sidebar-content h3 {
+  color: var(--primary-color);
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--accent-color);
+  display: inline-block;
+}
+
+.sidebar-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
+.sidebar-content li {
+  margin-bottom: 0.75rem;
+}
+
+.sidebar-content a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: var(--transition);
+  display: block;
+  padding: 0.5rem 0;
+}
+
+.sidebar-content a:hover {
+  color: var(--accent-color);
+  transform: translateX(5px);
+}
+
+.office-hours {
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-top: 1.5rem;
+}
+
+.office-hours h4 {
+  margin-top: 0;
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+.office-hours p {
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+  color: var(--secondary-color);
+}
+
+.cta-box {
+  background: white;
+  padding: 1.25rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-top: 1.5rem;
+  border-left: 3px solid var(--accent-color);
+}
+
+.cta-box h4 {
+  margin-top: 0;
+  color: var(--primary-color);
+}
+
+.cta-box p {
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0 0;
+}
+
+.cta-box a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.cta-box a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.contact-footer {
+  background: var(--primary-color);
+  color: white;
+  padding: 2rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.contact-footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footer-nav {
+  margin-top: 1rem;
+}
+
+.footer-nav a {
+  color: #a0aec0;
+  text-decoration: none;
+  margin: 0 0.5rem;
+  transition: var(--transition);
+}
+
+.footer-nav a:hover {
+  color: white;
+}
+
+.footer-nav span {
+  color: #4a5568;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .contact-main .container {
+    grid-template-columns: 1fr 2fr;
+  }
+  
+  .right-sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-main .container {
+    grid-template-columns: 1fr;
+    padding: 0 1.5rem;
+  }
+  
+  .contact-sidebar {
+    position: static;
+    margin-bottom: 2rem;
+  }
+  
+  .contact-header h1 {
+    font-size: 2rem;
+  }
+  
+  .contact-header p {
+    font-size: 1rem;
+  }
+}
+</style>

@@ -1,0 +1,275 @@
+---
+layout: default
+---
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <div class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}" class="post-date">
+        {{ page.date | date: "%B %-d, %Y" }}
+      </time>
+      {% if page.author %}
+        <span class="post-author">• {{ page.author }}</span>
+      {% endif %}
+    </div>
+    {% if page.image %}
+      <div class="post-image">
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+      </div>
+    {% endif %}
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  <footer class="post-footer">
+    <div class="post-tags">
+      {% if page.tags.size > 0 %}
+        <span>Tags: </span>
+        {% for tag in page.tags %}
+          <a href="{{ '/tags' | relative_url }}#{{ tag | slugify }}" class="post-tag">#{{ tag }}</a>
+        {% endfor %}
+      {% endif %}
+    </div>
+    
+    <div class="post-social-share">
+      <h3 class="share-title">Share this post</h3>
+      <div class="share-buttons">
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url | relative_url }}&title={{ page.title | uri_escape }}" target="_blank" class="share-btn linkedin">
+          <i class="fab fa-linkedin"></i>
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ site.url }}{{ page.url | relative_url }}" target="_blank" class="share-btn twitter">
+          <i class="fab fa-twitter"></i>
+          <span>Twitter</span>
+        </a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url | relative_url }}" target="_blank" class="share-btn facebook">
+          <i class="fab fa-facebook"></i>
+          <span>Facebook</span>
+        </a>
+        <a href="https://reddit.com/submit?url={{ site.url }}{{ page.url | relative_url }}&title={{ page.title | uri_escape }}" target="_blank" class="share-btn reddit">
+          <i class="fab fa-reddit"></i>
+          <span>Reddit</span>
+        </a>
+      </div>
+    </div>
+    
+    <div class="post-navigation">
+      {% if page.previous.url %}
+        <a href="{{ page.previous.url | relative_url }}" class="nav-previous">
+          ← {{ page.previous.title | truncatewords: 5 }}
+        </a>
+      {% endif %}
+      {% if page.next.url %}
+        <a href="{{ page.next.url | relative_url }}" class="nav-next">
+          {{ page.next.title | truncatewords: 5 }} →
+        </a>
+      {% endif %}
+    </div>
+  </footer>
+</article>
+
+<style>
+.post {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  line-height: 1.6;
+}
+
+.post-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.post-title {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.post-meta {
+  color: #7f8c8d;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.post-image {
+  margin: 2rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.post-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.post-content {
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.post-content h2 {
+  margin-top: 2.5rem;
+  color: #2c3e50;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.post-content p {
+  margin: 1.5rem 0;
+}
+
+.post-tags {
+  margin: 2rem 0;
+  padding: 1rem 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.post-tag {
+  display: inline-block;
+  margin: 0.2rem 0.3rem;
+  padding: 0.2rem 0.8rem;
+  background: #f0f4f8;
+  border-radius: 15px;
+  color: #3498db;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.post-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eee;
+}
+
+.nav-previous,
+.nav-next {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 500;
+  max-width: 45%;
+}
+
+.nav-previous:hover,
+.nav-next:hover {
+  text-decoration: underline;
+}
+
+.post-social-share {
+  margin: 2rem 0;
+  padding: 2rem 0;
+  border-top: 2px solid #e2e8f0;
+  border-bottom: 2px solid #e2e8f0;
+  text-align: center;
+}
+
+.share-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.share-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.share-btn i {
+  font-size: 1.1rem;
+}
+
+.share-btn.linkedin {
+  background: #0077b5;
+  color: white;
+}
+
+.share-btn.linkedin:hover {
+  background: #005585;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 119, 181, 0.3);
+}
+
+.share-btn.twitter {
+  background: #1da1f2;
+  color: white;
+}
+
+.share-btn.twitter:hover {
+  background: #1a91da;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(29, 161, 242, 0.3);
+}
+
+.share-btn.facebook {
+  background: #1877f2;
+  color: white;
+}
+
+.share-btn.facebook:hover {
+  background: #166fe5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+}
+
+.share-btn.reddit {
+  background: #ff4500;
+  color: white;
+}
+
+.share-btn.reddit:hover {
+  background: #e63900;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 69, 0, 0.3);
+}
+
+@media (max-width: 600px) {
+  .post-title {
+    font-size: 2rem;
+  }
+  
+  .share-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .share-btn {
+    width: 200px;
+    justify-content: center;
+  }
+  
+  .post-navigation {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .nav-previous,
+  .nav-next {
+    max-width: 100%;
+  }
+}
+</style>

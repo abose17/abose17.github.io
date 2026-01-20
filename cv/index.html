@@ -1,19 +1,197 @@
 ---
 layout: default
-title: Personal Website of Avishek Bose
+title: CV & Documents
 ---
-<div class="blurb">
-	<h2>Key Publications</h2>
-	
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
 
-    <section class="page__content" itemprop="text">
-      <ul>
-    <li> Short one-page resume <a href="/cv/bose_CV.pdf"> <i class="fa fa-file-pdf-o" style="font-size:12px;color:red"></i> </a> </li>
-    <li> Detailed CV <a href="/cv/bose_resume.pdf"> <i class="fa fa-file-pdf-o" style="font-size:12px;color:red"></i> </a> </li>
-    <li> Cover Letter <a href="/cv/bose_cover_letter.pdf"> <i class="fa fa-file-pdf-o" style="font-size:12px;color:red"></i> </a> </li>
-      </ul>
-    </section>
-  </article>
-</div><!-- /.blurb -->
+<style>
+.cv-tiles-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.cv-tile {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid #e2e8f0;
+}
+
+.cv-tile:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.tile-content {
+    padding: 2.5rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.tile-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, #4299e1, #2b6cb0);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.cv-tile:hover .tile-icon {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #2b6cb0, #2c5282);
+}
+
+.tile-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.tile-description {
+    color: #718096;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    min-height: 3rem;
+}
+
+.tile-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #4299e1;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #4299e1;
+    border-radius: 8px;
+    background: transparent;
+}
+
+.tile-link:hover {
+    background: #4299e1;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.tile-link i {
+    font-size: 1.1rem;
+}
+
+.tile-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4299e1, #2b6cb0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cv-tiles-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+    
+    .tile-content {
+        padding: 2rem;
+    }
+    
+    .tile-title {
+        font-size: 1.5rem;
+    }
+    
+    .tile-description {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tile-content {
+        padding: 1.5rem;
+    }
+    
+    .tile-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .tile-title {
+        font-size: 1.3rem;
+    }
+}
+</style>
+
+<div class="cv-tiles-container">
+    <div class="cv-tile" onclick="window.open('/cv/bose_resume.pdf', '_blank')">
+        <div class="tile-accent"></div>
+        <div class="tile-content">
+            <div class="tile-icon">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <h2 class="tile-title">Short One-Page Resume</h2>
+            <p class="tile-description">
+                Concise summary of qualifications, skills, and experience perfect for quick reviews and initial screening
+            </p>
+            <a href="/cv/bose_resume.pdf" class="tile-link" target="_blank">
+                <i class="fas fa-download"></i>
+                Download Resume
+            </a>
+        </div>
+    </div>
+
+    <div class="cv-tile" onclick="window.open('/cv/bose_CV.pdf', '_blank')">
+        <div class="tile-accent"></div>
+        <div class="tile-content">
+            <div class="tile-icon">
+                <i class="fas fa-file-text"></i>
+            </div>
+            <h2 class="tile-title">Detailed CV</h2>
+            <p class="tile-description">
+                Comprehensive curriculum vitae with complete academic background, research publications, projects, and detailed achievements
+            </p>
+            <a href="/cv/bose_CV.pdf" class="tile-link" target="_blank">
+                <i class="fas fa-download"></i>
+                Download CV
+            </a>
+        </div>
+    </div>
+
+    <div class="cv-tile" onclick="window.open('/cv/bose_cover_letter.pdf', '_blank')">
+        <div class="tile-accent"></div>
+        <div class="tile-content">
+            <div class="tile-icon">
+                <i class="fas fa-envelope-open-text"></i>
+            </div>
+            <h2 class="tile-title">Cover Letter</h2>
+            <p class="tile-description">
+                Professional cover letter highlighting research interests, career objectives, and suitability for academic positions
+            </p>
+            <a href="/cv/bose_cover_letter.pdf" class="tile-link" target="_blank">
+                <i class="fas fa-download"></i>
+                Download Cover Letter
+            </a>
+        </div>
+    </div>
+</div>

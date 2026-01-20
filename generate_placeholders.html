@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Placeholder Images</title>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <style>
+        .placeholder {
+            width: 800px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="naerm" class="placeholder" style="background-color: #3498db;">NA-ERM Project</div>
+    <button onclick="downloadImage('naerm')">Download NA-ERM Placeholder</button>
+    
+    <div id="gnn-optimization" class="placeholder" style="background-color: #2ecc71;">GNN Optimization</div>
+    <button onclick="downloadImage('gnn-optimization')">Download GNN Optimization Placeholder</button>
+    
+    <div id="drug-discovery" class="placeholder" style="background-color: #e74c3c;">Drug Discovery</div>
+    <button onclick="downloadImage('drug-discovery')">Download Drug Discovery Placeholder</button>
+    
+    <div id="cyber-threat" class="placeholder" style="background-color: #9b59b6;">Cyber Threat Intel</div>
+    <button onclick="downloadImage('cyber-threat')">Download Cyber Threat Intel Placeholder</button>
+
+    <script>
+        function downloadImage(id) {
+            const element = document.getElementById(id);
+            html2canvas(element).then(canvas => {
+                const link = document.createElement('a');
+                link.download = id + '.jpg';
+                link.href = canvas.toDataURL('image/jpeg');
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>
