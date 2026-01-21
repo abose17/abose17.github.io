@@ -171,33 +171,44 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   submitBtn.textContent = 'Sending...';
   submitBtn.disabled = true;
   
-  fetch('https://script.google.com/macros/s/AKfycbyEe43GgiA4YC-K7iDcF8gtsaFPRX0Z4_oBmpeHL3qASCwmVhNcLA7s4mGMsR-hWeJc/exec', {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data)
-  })
-  .then(() => {
+  // Create a hidden iframe to handle the form submission
+  const iframe = document.createElement('iframe');
+  iframe.style.display = 'none';
+  iframe.name = 'hidden_iframe';
+  document.body.appendChild(iframe);
+  
+  // Create a form to submit to Google Apps Script
+  const tempForm = document.createElement('form');
+  tempForm.action = 'https://script.google.com/macros/s/AKfycbwYL4-9Kt9wgdTcbtv0uMjqnezOO6XIWl-p8Kcbxh72k3V2KctpsZdPq6HObQNRyJhF/exec';
+  tempForm.method = 'POST';
+  tempForm.target = 'hidden_iframe';
+  
+  // Add data as form fields
+  Object.keys(data).forEach(key => {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = key;
+    input.value = data[key];
+    tempForm.appendChild(input);
+  });
+  
+  document.body.appendChild(tempForm);
+  tempForm.submit();
+  
+  // Show success message after a short delay
+  setTimeout(() => {
     const messageDiv = document.getElementById('formMessage');
     messageDiv.textContent = 'Thank you! Your message has been saved successfully.';
     messageDiv.style.backgroundColor = '#d4edda';
     messageDiv.style.color = '#155724';
     messageDiv.style.display = 'block';
     form.reset();
-  })
-  .catch(() => {
-    const messageDiv = document.getElementById('formMessage');
-    messageDiv.textContent = 'Thank you! Your message has been submitted successfully.';
-    messageDiv.style.backgroundColor = '#d1ecf1';
-    messageDiv.style.color = '#0c5460';
-    messageDiv.style.display = 'block';
-    form.reset();
-  })
-  .finally(() => {
     submitBtn.textContent = originalText;
     submitBtn.disabled = false;
-  });
+    
+    // Clean up
+    document.body.removeChild(tempForm);
+    document.body.removeChild(iframe);
+  }, 1000);
 });
 </script>
