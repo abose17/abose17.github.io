@@ -25,7 +25,7 @@ description: Feel free to reach out to me for collaborations, questions, or just
     
     <div class="contact-form">
       <h2>Send Me a Message</h2>
-      <form id="contactForm">
+      <form action="https://script.google.com/macros/s/AKfycbwYL4-9Kt9wgdTcbtv0uMjqnezOO6XIWl-p8Kcbxh72k3V2KctpsZdPq6HObQNRyJhF/exec" method="POST" target="hidden_iframe">
         <div class="form-group">
           <input type="text" name="name" placeholder="Your Name" required>
         </div>
@@ -40,6 +40,7 @@ description: Feel free to reach out to me for collaborations, questions, or just
         </div>
         <button type="submit" class="btn btn-primary">Send Message</button>
       </form>
+      <iframe name="hidden_iframe" style="display:none;"></iframe>
       <div id="formMessage" style="margin-top: 1rem; padding: 1rem; border-radius: 5px; display: none;"></div>
     </div>
   </div>
@@ -153,62 +154,4 @@ description: Feel free to reach out to me for collaborations, questions, or just
 }
 </style>
 
-<script>
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  const form = e.target;
-  const formData = new FormData(form);
-  const data = {
-    name: formData.get('name'),
-    email: formData.get('email'),
-    subject: formData.get('subject'),
-    message: formData.get('message')
-  };
-  
-  const submitBtn = form.querySelector('button[type="submit"]');
-  const originalText = submitBtn.textContent;
-  submitBtn.textContent = 'Sending...';
-  submitBtn.disabled = true;
-  
-  // Create a hidden iframe to handle the form submission
-  const iframe = document.createElement('iframe');
-  iframe.style.display = 'none';
-  iframe.name = 'hidden_iframe';
-  document.body.appendChild(iframe);
-  
-  // Create a form to submit to Google Apps Script
-  const tempForm = document.createElement('form');
-  tempForm.action = 'https://script.google.com/macros/s/AKfycbwYL4-9Kt9wgdTcbtv0uMjqnezOO6XIWl-p8Kcbxh72k3V2KctpsZdPq6HObQNRyJhF/exec';
-  tempForm.method = 'POST';
-  tempForm.target = 'hidden_iframe';
-  
-  // Add data as form fields
-  Object.keys(data).forEach(key => {
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = key;
-    input.value = data[key];
-    tempForm.appendChild(input);
-  });
-  
-  document.body.appendChild(tempForm);
-  tempForm.submit();
-  
-  // Show success message after a short delay
-  setTimeout(() => {
-    const messageDiv = document.getElementById('formMessage');
-    messageDiv.textContent = 'Thank you! Your message has been saved successfully.';
-    messageDiv.style.backgroundColor = '#d4edda';
-    messageDiv.style.color = '#155724';
-    messageDiv.style.display = 'block';
-    form.reset();
-    submitBtn.textContent = originalText;
-    submitBtn.disabled = false;
-    
-    // Clean up
-    document.body.removeChild(tempForm);
-    document.body.removeChild(iframe);
-  }, 1000);
-});
-</script>
+<!-- Simple form submission - no JavaScript needed -->
