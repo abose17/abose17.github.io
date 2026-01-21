@@ -39,6 +39,7 @@ description: Feel free to reach out to me for collaborations, questions, or just
           <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Send Message</button>
+        <button type="button" class="btn" onclick="alert('Button clicked!')" style="margin-left: 10px; background-color: #28a745;">Test Button</button>
       </form>
       <iframe name="hidden_iframe" style="display:none;"></iframe>
       <div id="formMessage" style="margin-top: 1rem; padding: 1rem; border-radius: 5px; display: none;"></div>
@@ -182,4 +183,14 @@ description: Feel free to reach out to me for collaborations, questions, or just
 }
 </style>
 
-<!-- Simple form submission - no JavaScript needed -->
+<!-- Simple form submission with debugging -->
+<script>
+document.querySelector('form').addEventListener('submit', function(e) {
+  console.log('Form submitting...');
+  const formData = new FormData(this);
+  console.log('Form data:');
+  for (let [key, value] of formData.entries()) {
+    console.log(key + ': ' + value);
+  }
+});
+</script>
