@@ -38,7 +38,7 @@ description: Feel free to reach out to me for collaborations, questions, or just
         <div class="form-group">
           <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Send Message</button>
+        <button type="submit" class="btn btn-primary" onclick="this.form.submit()">Send Message</button>
       </form>
       <iframe name="hidden_iframe" style="display:none;"></iframe>
       <div id="formMessage" style="margin-top: 1rem; padding: 1rem; border-radius: 5px; display: none;"></div>
