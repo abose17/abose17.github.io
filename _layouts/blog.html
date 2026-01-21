@@ -9,44 +9,37 @@ layout: default
         {% for post in site.posts %}
         <article class="blog-card">
             <a href="{{ post.url | relative_url }}" class="blog-card-link">
-                <div class="blog-image">
-                    {% if post.image %}
-                        <img src="{{ post.image | relative_url }}" alt="{{ post.title }}">
-                    {% else %}
-                        <div class="blog-image-placeholder">
-                            <span>{{ post.title | truncatewords: 3, '' }}</span>
-                        </div>
-                    {% endif %}
-                </div>
-                <div class="blog-content">
-                    <h2 class="blog-title">{{ post.title }}</h2>
-                    <div class="blog-meta">
-                        <time datetime="{{ post.date | date_to_xmlschema }}">
-                            {{ post.date | date: "%B %-d, %Y" }}
-                        </time>
-                        {% if post.author %}
-                            <span class="blog-author">by {{ post.author }}</span>
+                <div class="blog-card-container">
+                    <div class="blog-image">
+                        {% if post.image %}
+                            <img src="{{ post.image | relative_url }}" alt="{{ post.title }}">
+                        {% else %}
+                            <div class="blog-image-placeholder">
+                                <span>{{ post.title | truncatewords: 3, '' }}</span>
+                            </div>
                         {% endif %}
                     </div>
-                    <p class="blog-excerpt">
-                        {{ post.excerpt | default: post.content | strip_html | truncatewords: 30 }}
-                    </p>
-                    <div class="blog-social-share">
-                        <span class="share-label">Share:</span>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ post.url | relative_url }}&title={{ post.title | uri_escape }}" target="_blank" class="share-link linkedin">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://twitter.com/intent/tweet?text={{ post.title | uri_escape }}&url={{ site.url }}{{ post.url | relative_url }}" target="_blank" class="share-link twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ post.url | relative_url }}" target="_blank" class="share-link facebook">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="https://reddit.com/submit?url={{ site.url }}{{ post.url | relative_url }}&title={{ post.title | uri_escape }}" target="_blank" class="share-link reddit">
-                            <i class="fab fa-reddit"></i>
-                        </a>
+                    <div class="blog-content">
+                        <h2 class="blog-title">{{ post.title | default: "Blog Post Title" }}</h2>
+                        <div class="blog-meta">
+                            <time datetime="{{ post.date | date_to_xmlschema }}">
+                                {{ post.date | date: "%B %-d, %Y" }}
+                            </time>
+                            {% if post.author %}
+                                <span class="blog-author">by {{ post.author }}</span>
+                            {% endif %}
+                        </div>
+                        <p class="blog-excerpt">
+                            {{ post.excerpt | default: post.content | strip_html | truncatewords: 30 | default: "This is a blog post with interesting content about research, projects, and updates. Click to read more about this topic." }}
+                        </p>
+                        <div class="blog-card-icon">
+                            <svg viewBox="0 0 100 100">
+                                <g transform="translate(0,-952.36218)">
+                                    <path style="text-indent:0;text-transform:none;direction:ltr;block-progression:tb;baseline-shift:baseline;color:#000000;enable-background:accumulate;" d="m 20,984.36256 c -9.9374,0 -18,8.06262 -18,18.00004 0,9.9374 8.0626,18 18,18 l 19,0 a 2.0002,2.0002 0 1 0 0,-4 l -19,0 c -7.7906,0 -13.9999999,-6.2094 -13.9999999,-14 0,-7.79062 6.2093999,-14.00004 13.9999999,-14.00004 l 21,0 c 7.7906,0 14,6.20942 14,14.00004 a 2.0002,2.0002 0 1 0 4,0 c 0,-9.93742 -8.0626,-18.00004 -18,-18.00004 l -21,0 z m 40.875,0 a 2.0009763,2.0009763 0 1 0 0.125,4 l 19,0 c 7.7906,0 14,6.20942 14,14.00004 0,7.7906 -6.2094,14 -14,14 l -21,0 c -7.7906,0 -14,-6.2094 -14,-14 a 2.0002,2.0002 0 1 0 -4,0 c 0,9.9374 8.0626,18 18,18 l 21,0 c 9.9374,0 18,-8.0626 18,-18 0,-9.93742 -8.0626,-18.00004 -18,-18.00004 l -19,0 a 2.0002,2.0002 0 0 0 -0.125,0 z" fill-opacity="1" stroke="none" marker="none" visibility="visible" display="inline" overflow="visible"></path>
+                                </g>
+                            </svg>
+                        </div>
                     </div>
-                    <span class="read-more">Read more →</span>
                 </div>
             </a>
         </article>
@@ -72,22 +65,34 @@ layout: default
 
 .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
     margin-top: 2rem;
 }
 
 .blog-card {
-    background: white;
-    border-radius: 8px;
+    border: 1px solid #eaeaea;
+    border-radius: 15px;
+    box-shadow:
+        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06),
+        0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+        0 100px 80px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .blog-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+    box-shadow:
+        0 4.8px 3.2px rgba(0, 0, 0, 0.044),
+        0 8.7px 6.3px rgba(0, 0, 0, 0.058),
+        0 14.5px 11px rgba(0, 0, 0, 0.07),
+        0 24.3px 17.9px rgba(0, 0, 0, 0.082),
+        0 43.8px 33.4px rgba(0, 0, 0, 0.096),
+        0 102px 80px rgba(0, 0, 0, 0.13);
 }
 
 .blog-card-link {
@@ -97,10 +102,20 @@ layout: default
     height: 100%;
 }
 
+.blog-card-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1.2rem;
+    height: 100%;
+}
+
 .blog-image {
     width: 100%;
-    height: 200px;
+    height: 60px;
     overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 0.8rem;
+    order: 1;
 }
 
 .blog-image img {
@@ -117,7 +132,7 @@ layout: default
 .blog-image-placeholder {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #3498db, #9b59b6);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -128,116 +143,74 @@ layout: default
 }
 
 .blog-content {
-    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    order: 2;
 }
 
-.blog-title {
-    font-size: 1.5rem;
-    margin: 0 0 0.5rem 0;
+.blog-card-link .blog-title {
+    font-size: 1rem;
+    margin: 0 0 0.2rem 0;
     color: #2c3e50;
+    font-weight: 600;
+    line-height: 1.1;
+    text-decoration: none;
+    display: block;
+    order: 1;
+}
+
+.blog-card-link:hover .blog-title {
+    color: #3498db;
 }
 
 .blog-meta {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     color: #7f8c8d;
-    margin-bottom: 1rem;
+    margin-bottom: 0.3rem;
     display: flex;
-    gap: 1rem;
+    gap: 0.3rem;
+    order: 2;
 }
 
 .blog-excerpt {
     color: #555;
-    line-height: 1.6;
-    margin-bottom: 1rem;
+    line-height: 1.3;
+    margin-bottom: 0.3rem;
+    font-size: 0.8rem;
+    flex: 1;
+    order: 3;
 }
 
-.read-more {
-    color: #3498db;
-    font-weight: 500;
-    display: inline-block;
-    transition: transform 0.2s;
+.blog-card-icon {
+    align-self: center;
+    fill: #3498db;
+    order: 4;
+    width: 40px;
+    height: 40px;
+    margin-top: 0.5rem;
+    opacity: 0.7;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.blog-card:hover .read-more {
-    transform: translateX(5px);
+.blog-card:hover .blog-card-icon {
+    opacity: 1;
+    transform: translateX(4px);
 }
 
-.blog-social-share {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 1rem 0;
-    padding: 0.75rem 0;
-    border-top: 1px solid #e2e8f0;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-.share-label {
-    font-size: 0.9rem;
-    color: #7f8c8d;
-    font-weight: 500;
-    margin-right: 0.5rem;
-}
-
-.share-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-}
-
-.share-link.linkedin {
-    background: #0077b5;
-    color: white;
-}
-
-.share-link.linkedin:hover {
-    background: #005585;
-    transform: translateY(-2px);
-}
-
-.share-link.twitter {
-    background: #1da1f2;
-    color: white;
-}
-
-.share-link.twitter:hover {
-    background: #1a91da;
-    transform: translateY(-2px);
-}
-
-.share-link.facebook {
-    background: #1877f2;
-    color: white;
-}
-
-.share-link.facebook:hover {
-    background: #166fe5;
-    transform: translateY(-2px);
-}
-
-.share-link.reddit {
-    background: #ff4500;
-    color: white;
-}
-
-.share-link.reddit:hover {
-    background: #e63900;
-    transform: translateY(-2px);
-}
-
+/* Responsive Design */
 @media (max-width: 768px) {
     .blog-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
     }
     
-    .blog-social-share {
-        flex-wrap: wrap;
+    .blog-card-container {
+        padding: 1rem;
+    }
+    
+    .blog-image {
+        height: 50px;
     }
 }
 </style>
