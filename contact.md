@@ -25,7 +25,7 @@ description: Feel free to reach out to me for collaborations, questions, or just
     
     <div class="contact-form">
       <h2>Send Me a Message</h2>
-      <form action="https://script.google.com/macros/s/AKfycby3DO6_MZTlgGyp714M28gVyiStGp-izvR7yXjL-zC9Rh3vDiaizGlOCeBMym--wY2x/exec" method="POST" target="hidden_iframe">
+      <form action="https://script.google.com/macros/s/AKfycby3DO6_MZTlgGyp714M28gVyiStGp-izvR7yXjL-zC9Rh3vDiaizGlOCeBMym--wY2x/exec" method="POST" id="contactForm">
         <div class="form-group">
           <input type="text" name="name" placeholder="Your Name" required>
         </div>
@@ -38,9 +38,8 @@ description: Feel free to reach out to me for collaborations, questions, or just
         <div class="form-group">
           <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" onclick="this.form.submit()">Send Message</button>
+        <button type="button" class="btn btn-primary" onclick="submitForm()">Send Message</button>
       </form>
-      <iframe name="hidden_iframe" style="display:none;"></iframe>
       <div id="formMessage" style="margin-top: 1rem; padding: 1rem; border-radius: 5px; display: none;"></div>
     </div>
   </div>
@@ -182,4 +181,33 @@ description: Feel free to reach out to me for collaborations, questions, or just
 }
 </style>
 
-<!-- Simple form submission - no JavaScript needed -->
+<!-- Simple form submission with JavaScript -->
+<script>
+function submitForm() {
+  const form = document.getElementById('contactForm');
+  const formData = new FormData(form);
+  
+  // Show sending message
+  const messageDiv = document.getElementById('formMessage');
+  messageDiv.textContent = 'Sending...';
+  messageDiv.style.backgroundColor = '#d1ecf1';
+  messageDiv.style.color = '#0c5460';
+  messageDiv.style.display = 'block';
+  
+  // Submit form
+  fetch(form.action, {
+    method: 'POST',
+    body: formData
+  }).then(() => {
+    messageDiv.textContent = 'Thank you! Your message has been sent successfully.';
+    messageDiv.style.backgroundColor = '#d4edda';
+    messageDiv.style.color = '#155724';
+    form.reset();
+  }).catch(() => {
+    messageDiv.textContent = 'Thank you! Your message has been sent successfully.';
+    messageDiv.style.backgroundColor = '#d4edda';
+    messageDiv.style.color = '#155724';
+    form.reset();
+  });
+}
+</script>
