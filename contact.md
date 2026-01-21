@@ -12,6 +12,8 @@ description: Feel free to reach out to me for collaborations, questions, or just
 
   <div class="contact-content">
     <div class="contact-info">
+      <h2>Contact Information</h2>
+      
       <h2>Email</h2>
       <p>bosea@ornl.gov, avishek.csedu.res@gmail.com, abose@ksu.edu</p>
       
@@ -23,24 +25,28 @@ description: Feel free to reach out to me for collaborations, questions, or just
       <p>5700 Central Ave, F229, Oak Ridge, Tennessee, USA 37831-6164</p>
     </div>
     
-    <div class="contact-form">
+    <div class="contact-form-container">
       <h2>Send Me a Message</h2>
-      <form action="https://script.google.com/macros/s/AKfycby3DO6_MZTlgGyp714M28gVyiStGp-izvR7yXjL-zC9Rh3vDiaizGlOCeBMym--wY2x/exec" method="POST" id="contactForm">
+      <form id="contactForm">
         <div class="form-group">
-          <input type="text" name="name" placeholder="Your Name" required>
+          <label for="name">Your Name *</label>
+          <input type="text" id="name" name="name" required>
         </div>
         <div class="form-group">
-          <input type="email" name="email" placeholder="Your Email" required>
+          <label for="email">Your Email *</label>
+          <input type="email" id="email" name="email" required>
         </div>
         <div class="form-group">
-          <input type="text" name="subject" placeholder="Subject" required>
+          <label for="subject">Subject *</label>
+          <input type="text" id="subject" name="subject" required>
         </div>
         <div class="form-group">
-          <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+          <label for="message">Your Message *</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
         </div>
-        <button type="button" class="btn btn-primary" onclick="submitForm()">Send Message</button>
+        <button type="submit" class="submit-btn">Send Message</button>
       </form>
-      <div id="formMessage" style="margin-top: 1rem; padding: 1rem; border-radius: 5px; display: none;"></div>
+      <div id="formStatus" class="form-status"></div>
     </div>
   </div>
 </div>
@@ -78,8 +84,8 @@ description: Feel free to reach out to me for collaborations, questions, or just
 
 .contact-info h2 {
   color: #2d3748;
-  margin-bottom: 0.5rem;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .contact-info p {
@@ -88,29 +94,36 @@ description: Feel free to reach out to me for collaborations, questions, or just
   line-height: 1.6;
 }
 
-.contact-form {
-  background: #fff;
+.contact-form-container {
+  background: #f8f9fa;
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.contact-form h2 {
+.contact-form-container h2 {
   color: #2d3748;
-  margin-bottom: 1.5rem;
   font-size: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-group {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #4a5568;
+  font-weight: 500;
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
 }
@@ -118,96 +131,116 @@ description: Feel free to reach out to me for collaborations, questions, or just
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #4299e1;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
 }
 
-.btn-primary {
-  background: #4299e1;
+.submit-btn {
+  background-color: #007bff;
   color: white;
+  padding: 12px 30px;
   border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
+  border-radius: 5px;
+  font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  width: 100%;
-  font-size: 1rem;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.btn-primary:hover {
-  background: #2b6cb0;
+.submit-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.submit-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.form-status {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+  display: none;
+}
+
+.form-status.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.form-status.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.form-status.sending {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
 }
 
 @media (max-width: 768px) {
   .contact-content {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
   
   .contact-header h1 {
     font-size: 2rem;
   }
   
-  .contact-form {
+  .contact-form-container {
     padding: 1.5rem;
   }
 }
-
-.btn {
-  display: inline-block;
-  padding: 12px 24px;
-  font-size: 1rem;
-  font-weight: 500;
-  text-align: center;
-  text-decoration: none;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-primary {
-  background-color: #007bff;
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
-}
-
-.btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
 </style>
 
-<!-- Simple form submission with JavaScript -->
 <script>
-function submitForm() {
-  const form = document.getElementById('contactForm');
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const form = e.target;
   const formData = new FormData(form);
+  const statusDiv = document.getElementById('formStatus');
+  const submitBtn = form.querySelector('.submit-btn');
   
-  // Show sending message
-  const messageDiv = document.getElementById('formMessage');
-  messageDiv.textContent = 'Sending...';
-  messageDiv.style.backgroundColor = '#d1ecf1';
-  messageDiv.style.color = '#0c5460';
-  messageDiv.style.display = 'block';
+  // Show sending status
+  statusDiv.textContent = 'Sending your message...';
+  statusDiv.className = 'form-status sending';
+  statusDiv.style.display = 'block';
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending...';
   
-  // Submit form
-  fetch(form.action, {
-    method: 'POST',
-    body: formData
-  }).then(() => {
-    messageDiv.textContent = 'Thank you! Your message has been sent successfully.';
-    messageDiv.style.backgroundColor = '#d4edda';
-    messageDiv.style.color = '#155724';
-    form.reset();
-  }).catch(() => {
-    messageDiv.textContent = 'Thank you! Your message has been sent successfully.';
-    messageDiv.style.backgroundColor = '#d4edda';
-    messageDiv.style.color = '#155724';
-    form.reset();
-  });
-}
+  try {
+    const response = await fetch('https://script.google.com/macros/s/AKfycby3DO6_MZTlgGyp714M28gVyiStGp-izvR7yXjL-zC9Rh3vDiaizGlOCeBMym--wY2x/exec', {
+      method: 'POST',
+      body: formData
+    });
+    
+    if (response.ok) {
+      statusDiv.textContent = 'Thank you! Your message has been sent successfully.';
+      statusDiv.className = 'form-status success';
+      form.reset();
+    } else {
+      throw new Error('Form submission failed');
+    }
+    
+  } catch (error) {
+    console.error('Form submission error:', error);
+    statusDiv.textContent = 'There was an error sending your message. Please try again.';
+    statusDiv.className = 'form-status error';
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send Message';
+    
+    // Hide status message after 5 seconds
+    setTimeout(() => {
+      statusDiv.style.display = 'none';
+    }, 5000);
+  }
+});
 </script>
