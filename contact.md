@@ -20,9 +20,9 @@ description: Feel free to reach out to me for collaborations, questions, or just
       <h2>Phone</h2>
       <p>+1(785)317-6675</p>
       
-      <h2>Office</h2>
+      <!-- <h2>Office</h2>
       <p>Learning Systems group, Data & AI Systems Research section, Computer Science and Mathematics Division, ORNL</p>
-      <p>5700 Central Ave, F229, Oak Ridge, Tennessee, USA 37831-6164</p>
+      <p>5700 Central Ave, F229, Oak Ridge, Tennessee, USA 37831-6164</p> -->
     </div>
     
     <div class="contact-form-container">
