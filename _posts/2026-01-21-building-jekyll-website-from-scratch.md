@@ -5,7 +5,7 @@ date: 2026-01-21 20:00:00 -0500
 categories: [tutorials, web-development, jekyll]
 tags: [jekyll, git, github-pages, web-dev, tutorial]
 author: Avishek Bose
-image: /assets/images/jekyll-website.jpg
+image: /assets/images/image_blogs.jpg
 excerpt: "Learn how I built a complete Jekyll website from scratch over a weekend using modern tools and techniques. This comprehensive guide covers everything from initial setup to deployment, including Google Sheets integration, responsive design, and modern web development practices."
 ---
 
@@ -55,169 +55,9 @@ gem install jekyll
 jekyll new .
 ```
 
-This created the essential directory structure:
-```
-my-website/
-├── _config.yml          # Jekyll configuration
-├── _layouts/           # HTML templates
-├── _posts/             # Blog posts
-├── _sass/              # CSS files
-├── assets/              # Static assets
-└── index.html           # Homepage
-```
-
-## 🎨 Design Implementation
-
-### CSS Architecture
-I used modern CSS techniques for responsive design:
-
-```css
-/* Modern CSS with CSS Grid and Flexbox */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-.blog-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.blog-card {
-    border-radius: 15px;
-    box-shadow: 0 2.8px 2.2px rgba(0,0,0,0.034);
-    transition: transform 0.3s ease;
-}
-
-.blog-card:hover {
-    transform: translateY(-5px);
-}
-```
-
-### Responsive Design
-Implemented mobile-first responsive design:
-
-```css
-/* Mobile-first approach */
-@media (max-width: 768px) {
-    .blog-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .container {
-        padding: 1rem;
-    }
-}
-```
-
-## 📝 Content Management
-
-### Blog Posts Structure
-Created structured blog posts with front matter:
-
-```yaml
----
-layout: post
-title: "Your Post Title"
-date: 2026-01-21 15:00:00 -0500
-categories: [category1, category2]
-tags: [tag1, tag2, tag3]
-author: Avishek Bose
-image: /assets/images/post-image.jpg
-excerpt: "Brief description for SEO and previews"
----
-
-# Post Content
-
-Your blog post content in Markdown...
-```
-
-### Contact Page Development
-Built a sophisticated contact form with Google Sheets integration:
-
-```html
-<!-- Contact Form with Google Sheets Integration -->
-<div class="contact-form-container">
-    <form id="contactForm">
-        <div class="form-group">
-            <label for="name">Your Name *</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <button type="submit" class="submit-btn">Send Message</button>
-    </form>
-    <div id="formStatus" class="form-status"></div>
-</div>
-
-<script>
-document.getElementById('contactForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(e.target);
-    const statusDiv = document.getElementById('formStatus');
-    
-    try {
-        const response = await fetch('GOOGLE_APPS_SCRIPT_URL', {
-            method: 'POST',
-            body: formData
-        });
-        
-        if (response.ok) {
-            statusDiv.textContent = 'Thank you! Your message has been sent successfully.';
-            statusDiv.className = 'form-status success';
-            e.target.reset();
-        }
-    } catch (error) {
-        statusDiv.textContent = 'There was an error sending your message.';
-        statusDiv.className = 'form-status error';
-    }
-});
-</script>
-```
-
-## 🔧 Google Sheets Integration
-
-### Apps Script Setup
-Created a Google Apps Script to handle form submissions:
-
-```javascript
-function doPost(e) {
-    try {
-        const sheet = SpreadsheetApp.getActiveSpreadsheet()
-            .getSheetByName("Contact Form Submissions");
-        
-        const name = e.parameter.name;
-        const email = e.parameter.email;
-        const subject = e.parameter.subject;
-        const message = e.parameter.message;
-        
-        sheet.appendRow([
-            new Date(),
-            name,
-            email,
-            subject,
-            message
-        ]);
-        
-        return ContentService.createTextOutput(JSON.stringify({
-            status: "success",
-            message: "Form submission saved successfully"
-        })).setMimeType(ContentService.MimeType.JSON);
-        
-    } catch (error) {
-        return ContentService.createTextOutput(JSON.stringify({
-            status: "error", 
-            message: error.toString()
-        })).setMimeType(ContentService.MimeType.JSON);
-    }
-}
-```
-
 ## 🛠️ Development Workflow
 
-### Git Commands Used
+### Essential Git Commands
 Throughout the project, I used these Git commands:
 
 ```bash
@@ -248,52 +88,39 @@ git merge feature/contact-form
 git push origin main
 ```
 
-## 🎯 Key Features Implemented
+## 🤖 AI-Assisted Development
 
-### 1. Modern Blog Cards
-Created responsive blog cards with:
-- Hover animations and shadows
-- Image optimization and lazy loading
-- SEO-friendly meta information
-- Social sharing capabilities
+### Key LLM Prompts Used
+I used AI assistance throughout the development process with these effective prompts:
 
-### 2. Contact Form System
-Built complete contact management with:
-- Real-time form validation
-- Google Sheets integration
-- Error handling and user feedback
-- Mobile-responsive design
+**For Initial Setup:**
+```
+"Help me create a Jekyll website from scratch with modern design and responsive layout. Include a blog section, contact form, and professional portfolio pages."
+```
 
-### 3. Performance Optimization
-- Lazy loading for images
-- Minified CSS and JavaScript
-- Optimized for Core Web Vitals
-- SEO meta tags and structured data
+**For Contact Form Integration:**
+```
+"I need to integrate a contact form with Google Sheets using Google Apps Script. Create the HTML form, JavaScript submission code, and provide the Apps Script code for handling form submissions."
+```
 
-## 📱 Responsive Design Strategy
+**For Responsive Design:**
+```
+"Make my website fully responsive for mobile devices. Use CSS Grid and Flexbox for modern layouts, and ensure all elements work properly on screens of all sizes."
+```
 
-### Mobile-First Approach
-Designed for mobile devices first, then scaled up:
+**For Debugging Issues:**
+```
+"My contact form submit button isn't working. Help me debug the JavaScript and ensure proper form submission to Google Apps Script. Check for CORS issues and form validation."
+```
 
-```css
-/* Base styles for mobile */
-.blog-card {
-    padding: 1rem;
-}
+**For Blog Card Design:**
+```
+"Create modern blog cards with hover effects, shadows, and clean typography. Make them vertically compact and ensure the entire card is clickable."
+```
 
-/* Enhancements for tablets */
-@media (min-width: 768px) {
-    .blog-card {
-        padding: 1.5rem;
-    }
-}
-
-/* Desktop enhancements */
-@media (min-width: 1024px) {
-    .blog-card {
-        padding: 2rem;
-    }
-}
+**For Performance Optimization:**
+```
+"Optimize my website for performance. Add lazy loading for images, minify CSS, and implement Core Web Vitals best practices."
 ```
 
 ## 🚀 Deployment Process
@@ -331,95 +158,6 @@ collections:
     output: true
     permalink: /blog/:year/:month/:day/:title/
 ```
-
-## 🎨 Design System
-
-### Color Palette
-Used consistent color scheme throughout:
-
-```css
-:root {
-    --primary-color: #007bff;
-    --secondary-color: #6c757d;
-    --success-color: #28a745;
-    --error-color: #dc3545;
-    --text-color: #333;
-    --background-color: #f8f9fa;
-}
-```
-
-### Typography
-Implemented scalable typography system:
-
-```css
-h1 { font-size: 2.5rem; }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.5rem; }
-p { font-size: 1rem; line-height: 1.6; }
-```
-
-## 🔍 Debugging Process
-
-### Common Issues and Solutions
-**Issue 1: Form not submitting**
-- **Problem:** CORS errors with fetch API
-- **Solution:** Used FormData and proper headers
-
-**Issue 2: Mobile layout breaking**
-- **Problem:** Fixed grid layouts on small screens
-- **Solution:** Mobile-first CSS with proper breakpoints
-
-**Issue 3: Google Sheets integration failing**
-- **Problem:** Sheet name mismatch
-- **Solution:** Updated Apps Script to use correct sheet name
-
-## 📊 Performance Results
-
-### Core Web Vitals
-Achieved excellent performance metrics:
-- **LCP:** < 2.5s (Good)
-- **FID:** < 100ms (Good)
-- **CLS:** < 0.1 (Good)
-
-### SEO Optimization
-- Meta descriptions for all pages
-- Structured data markup
-- XML sitemaps
-- Proper heading hierarchy
-
-## 🎓 Lessons Learned
-
-### What Worked Well
-1. **AI-Assisted Development:** Using AI for rapid prototyping and problem-solving
-2. **Modern Tooling:** Jekyll, Git, and modern CSS techniques
-3. **Iterative Approach:** Building and testing incrementally
-4. **Responsive-First:** Mobile optimization from the start
-
-### Challenges Faced
-1. **CORS Issues:** Browser security restrictions with cross-origin requests
-2. **Sheet Integration:** Google Apps Script debugging and configuration
-3. **Time Management:** Balancing speed with thoroughness
-
-### Future Improvements
-1. **Automated Testing:** Add CI/CD pipeline
-2. **Performance Monitoring:** Implement real user analytics
-3. **Content Management:** Add CMS for easier updates
-4. **Security:** Add form validation and rate limiting
-
-## 🛠️ Tools and Resources
-
-### Essential Tools Used
-- **VS Code:** Code editor with extensions
-- **Chrome DevTools:** Debugging and performance analysis
-- **GitHub:** Version control and deployment
-- **Google Sheets:** Backend data storage
-- **Google Apps Script:** Serverless backend functions
-
-### Helpful Resources
-- [Jekyll Documentation](https://jekyllrb.com/docs/)
-- [MDN Web Docs](https://developer.mozilla.org/)
-- [CSS Tricks](https://css-tricks.com/)
-- [Google Apps Script Guide](https://developers.google.com/apps-script)
 
 ## 🎯 Quick Start Guide
 
